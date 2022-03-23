@@ -1,26 +1,46 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="counter">
+        <div>{{ counter }}</div>
+        <button @click="counter++">Increase</button>
+        <input type="text" v-model="someText" />
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: "App",
+    data() {
+        return {
+            counter: 0,
+            someText: "",
+        };
+    },
+    watch: {
+        counter(newValue, oldValue) {
+            console.log(`Old Value: ${oldValue}`);
+            console.log(`New Value: ${newValue}`);
+        },
+        someText() {
+            this.updateCounter();
+        },
+    },
+
+    methods: {
+        updateCounter() {
+            this.counter++;
+            console.log("update");
+        },
+    },
+};
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    color: #2c3e50;
+    margin-top: 60px;
 }
 </style>
